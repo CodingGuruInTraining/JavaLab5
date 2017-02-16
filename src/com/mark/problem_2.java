@@ -9,7 +9,7 @@ import java.util.Scanner;
 /*
  *  This program prompts User for values of a street's recycling
  *  habits and then determines which house sets out the most
- *  recyclables.
+ *  recyclables. These values are written to a text file.
  */
 
 public class problem_2 {
@@ -33,42 +33,29 @@ public class problem_2 {
         int minCrates = calculateMin(cratesPerHouse);
         // Runs function to determine the house(s) with the most crates.
         ArrayList<Integer> housesWithMostRecycling = calculateHouseWithMostRecycling(cratesPerHouse, maxCrates);
-
+        // Loops through array and writes how many crates each house used.
         for (int x = 0; x < cratesPerHouse.length; x++) {
             buffWriter.write("House " + x + " recycled " + cratesPerHouse[x] + " crate(s)\n");
         }
+        // Writes the total number of crates.
         buffWriter.write("\nTotal crates recycled = " + totalCrates + "\n\n");
-
-
-//        // Displays the results.
-//        System.out.println("Total crates from all houses = " + totalCrates);
-//        System.out.println("Max crates at any house = " + maxCrates);
-//        System.out.println("Min crates at any house = " + minCrates);
-
 
         // Determines if multiple houses have the max count.
         if (housesWithMostRecycling.size() > 1) {
+            // Starts writing for multiple houses.
             buffWriter.write("Houses that recycled the most:\n");
-//            String houses = "";
-//            // Displays the start of result.
-//            System.out.print("Houses with most recycling = ");
-            // Loops through ArrayList and combines items in string.
+
+            // Loops through ArrayList and writes each house along with the max value.
             for (int x = 0; x < (housesWithMostRecycling.size()); x++) {
-//                houses += housesWithMostRecycling.get(x) + ", ";
                 buffWriter.write("House " + housesWithMostRecycling.get(x) + ": " + maxCrates + " crates\n");
             }
-//            // Adds last item to string without a separator.
-//            houses += housesWithMostRecycling.get(housesWithMostRecycling.size() - 1);
-//            // Displays full string.
-//            System.out.println(houses);
         }
         else {
+            // Writes a single house and its number of crates.
             buffWriter.write("House that recycled the most:\n");
             buffWriter.write("House " + housesWithMostRecycling.get(0) + ": " + maxCrates + " crates\n");
-//            // Displays a single house number.
-//            System.out.println("House with most recycling = " + housesWithMostRecycling.get(0).toString());
         }
-        // Closes Scanner object.
+        // Closes Scanner and Writer objects.
         numberScanner.close();
         buffWriter.close();
     }
