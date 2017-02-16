@@ -41,4 +41,18 @@ public class problem_3 {
             System.out.println("Can't read file.");
         }
     }
+
+    public static int calculateMax(int[] cratesPerHouse) {
+        // Defines max variable.
+        int max = 0;
+        // Loops through array and compares item to max variable.
+        // Sets item as new max if greater than current max.
+        for (int x : cratesPerHouse) {
+            if (x > max) {
+                max = x;
+            }
+        }
+        // Returns max variable.
+        return max;
+    }
 }
