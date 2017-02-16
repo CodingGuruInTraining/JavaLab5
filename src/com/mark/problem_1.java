@@ -7,7 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Created by hl4350hb on 2/15/2017.
+ *  This program writes some lines to a text file and then reads
+ *  the same lines.
  */
 public class problem_1 {
     public static void main(String[] args) throws IOException {
