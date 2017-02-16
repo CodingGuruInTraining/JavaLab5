@@ -33,8 +33,8 @@ public class problem_3 {
                 allCrates.add(crates);
             }
 
-
-
+            int maxCrates = calculateMax(allCrates);
+            ArrayList<Integer> housesWithMost = calculateHouseWithMostRecycling(allCrates, maxCrates);
 
         }
         catch (IOException err) {
@@ -42,7 +42,7 @@ public class problem_3 {
         }
     }
 
-    public static int calculateMax(int[] cratesPerHouse) {
+    public static int calculateMax(ArrayList<Integer> cratesPerHouse) {
         // Defines max variable.
         int max = 0;
         // Loops through array and compares item to max variable.
@@ -54,5 +54,20 @@ public class problem_3 {
         }
         // Returns max variable.
         return max;
+    }
+
+    public static ArrayList calculateHouseWithMostRecycling(ArrayList<Integer> cratesPerHouse, int max) {
+        // Creates new ArrayList object.
+        ArrayList<Integer> housesWithMost = new ArrayList<>();
+        // Loops through provided array and checks if each item
+        // is equal to the provided max value. Matches are added
+        // to the ArrayList.
+        for (int x = 0; x < cratesPerHouse.size(); x++) {
+            if (cratesPerHouse.get(x) == max) {
+                housesWithMost.add(x);
+            }
+        }
+        // return ArrayList.
+        return housesWithMost;
     }
 }
