@@ -1,13 +1,12 @@
 package com.mark;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//GitHub link (program and unit tests):
-// https://github.com/CodingGuruInTraining/lab4_recycling
-
 /*
- *  Lab 4, Question 2
  *  This program prompts User for values of a street's recycling
  *  habits and then determines which house sets out the most
  *  recyclables.
@@ -17,7 +16,11 @@ public class problem_2 {
     // Creates Scanner object.
     static Scanner numberScanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        // Creates FileWriter and BufferedWriter objects.
+        FileWriter writer = new FileWriter("lab5_problem2.txt");
+        BufferedWriter buffWriter = new BufferedWriter(writer);
+
         // Defines static number of houses.
         int numberOfHouses = 8;
         // Runs function that prompts User for input.
@@ -30,30 +33,44 @@ public class problem_2 {
         int minCrates = calculateMin(cratesPerHouse);
         // Runs function to determine the house(s) with the most crates.
         ArrayList<Integer> housesWithMostRecycling = calculateHouseWithMostRecycling(cratesPerHouse, maxCrates);
-        // Displays the results.
-        System.out.println("Total crates from all houses = " + totalCrates);
-        System.out.println("Max crates at any house = " + maxCrates);
-        System.out.println("Min crates at any house = " + minCrates);
+
+        for (int x = 0; x < cratesPerHouse.length; x++) {
+            buffWriter.write("House " + x + " recycled " + cratesPerHouse[x] + " crate(s)\n");
+        }
+        buffWriter.write("\nTotal crates recycled = " + totalCrates + "\n\n");
+
+
+//        // Displays the results.
+//        System.out.println("Total crates from all houses = " + totalCrates);
+//        System.out.println("Max crates at any house = " + maxCrates);
+//        System.out.println("Min crates at any house = " + minCrates);
+
+
         // Determines if multiple houses have the max count.
         if (housesWithMostRecycling.size() > 1) {
-            String houses = "";
-            // Displays the start of result.
-            System.out.print("Houses with most recycling = ");
+            buffWriter.write("Houses that recycled the most:\n");
+//            String houses = "";
+//            // Displays the start of result.
+//            System.out.print("Houses with most recycling = ");
             // Loops through ArrayList and combines items in string.
-            for (int x = 0; x < (housesWithMostRecycling.size() -1); x++) {
-                houses += housesWithMostRecycling.get(x) + ", ";
+            for (int x = 0; x < (housesWithMostRecycling.size()); x++) {
+//                houses += housesWithMostRecycling.get(x) + ", ";
+                buffWriter.write("House " + housesWithMostRecycling.get(x) + ": " + maxCrates + " crates\n");
             }
-            // Adds last item to string without a separator.
-            houses += housesWithMostRecycling.get(housesWithMostRecycling.size() - 1);
-            // Displays full string.
-            System.out.println(houses);
+//            // Adds last item to string without a separator.
+//            houses += housesWithMostRecycling.get(housesWithMostRecycling.size() - 1);
+//            // Displays full string.
+//            System.out.println(houses);
         }
         else {
-            // Displays a single house number.
-            System.out.println("House with most recycling = " + housesWithMostRecycling.get(0).toString());
+            buffWriter.write("House that recycled the most:\n");
+            buffWriter.write("House " + housesWithMostRecycling.get(0) + ": " + maxCrates + " crates\n");
+//            // Displays a single house number.
+//            System.out.println("House with most recycling = " + housesWithMostRecycling.get(0).toString());
         }
         // Closes Scanner object.
         numberScanner.close();
+        buffWriter.close();
     }
     // Ask user for number of crates for each house. Store in array and return this array.
     public static int[] getRecyclingPerHouse(int houses) {
