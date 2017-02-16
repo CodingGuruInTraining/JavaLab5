@@ -25,15 +25,21 @@ public class problem_3 {
             ArrayList<Integer> allHouses = new ArrayList<>();
             ArrayList<Integer> allCrates = new ArrayList<>();
 
+            ArrayList<int[]> housesAndCrates = new ArrayList<>();
+
             for (String item : allLines) {
                 String[] temp = item.split(" ");
                 int house = Integer.parseInt(temp[1]);
                 int crates = Integer.parseInt(temp[3]);
-                allHouses.add(house);
-                allCrates.add(crates);
+                int[] tempArr = new int[2];
+                tempArr[0] = house;
+                tempArr[1] = crates;
+                housesAndCrates.add(tempArr);
+//                allHouses.add(house);
+//                allCrates.add(crates);
             }
 
-            int maxCrates = calculateMax(allCrates);
+            int maxCrates = calculateMax(housesAndCrates);
             ArrayList<Integer> housesWithMost = calculateHouseWithMostRecycling(allCrates, maxCrates);
 
         }
@@ -42,14 +48,21 @@ public class problem_3 {
         }
     }
 
-    public static int calculateMax(ArrayList<Integer> cratesPerHouse) {
+    public static int calculateMax(ArrayList<int[]> cratesPerHouse) {
         // Defines max variable.
         int max = 0;
+        int temp = 0;
+
         // Loops through array and compares item to max variable.
         // Sets item as new max if greater than current max.
-        for (int x : cratesPerHouse) {
-            if (x > max) {
-                max = x;
+        for (int x = 0; x < cratesPerHouse.size(); x++) {
+//        for (int[] x : cratesPerHouse) {
+
+            temp = cratesPerHouse.get(x)[1];
+            if (temp > max) {
+                max = temp;
+//            if (x[1] > max) {
+//                max = x[0];
             }
         }
         // Returns max variable.
