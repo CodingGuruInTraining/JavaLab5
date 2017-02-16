@@ -22,8 +22,8 @@ public class problem_3 {
             }
             buffReader.close();
 
-            ArrayList<Integer> allHouses = new ArrayList<>();
-            ArrayList<Integer> allCrates = new ArrayList<>();
+//            ArrayList<Integer> allHouses = new ArrayList<>();
+//            ArrayList<Integer> allCrates = new ArrayList<>();
 
             ArrayList<int[]> housesAndCrates = new ArrayList<>();
 
@@ -41,7 +41,13 @@ public class problem_3 {
 
             int maxCrates = calculateMax(housesAndCrates);
             ArrayList<Integer> housesWithMost = calculateHouseWithMostRecycling(housesAndCrates, maxCrates);
+            String houseStr = "";
+            for (int x = 0; x < housesWithMost.size() - 1; x++) {
+                houseStr += housesWithMost.get(x) + ", ";
+            }
+            houseStr += housesWithMost.get(housesWithMost.size() - 1);
 
+            System.out.print("Houses with the most crates: " + houseStr);
         }
         catch (IOException err) {
             System.out.println("Can't read file.");
