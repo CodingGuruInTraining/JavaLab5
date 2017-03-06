@@ -17,47 +17,49 @@ public class problem_2 {
     static Scanner numberScanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        // Creates FileWriter and BufferedWriter objects.
-        FileWriter writer = new FileWriter("lab5_problem2.txt");
-        BufferedWriter buffWriter = new BufferedWriter(writer);
-
-        // Defines static number of houses.
-        int numberOfHouses = 8;
-        // Runs function that prompts User for input.
-        int[] cratesPerHouse = getRecyclingPerHouse(numberOfHouses);
-        // Runs function to sum up the User's inputs.
-        int totalCrates = calculateTotal(cratesPerHouse);
-        // Runs function to determine the max.
-        int maxCrates = calculateMax(cratesPerHouse);
-        // Runs function to determine the min.
-        int minCrates = calculateMin(cratesPerHouse);
-        // Runs function to determine the house(s) with the most crates.
-        ArrayList<Integer> housesWithMostRecycling = calculateHouseWithMostRecycling(cratesPerHouse, maxCrates);
-        // Loops through array and writes how many crates each house used.
-        for (int x = 0; x < cratesPerHouse.length; x++) {
-            buffWriter.write("House " + x + " recycled " + cratesPerHouse[x] + " crate(s)\n");
-        }
-        // Writes the total number of crates.
-        buffWriter.write("\nTotal crates recycled = " + totalCrates + "\n\n");
-
-        // Determines if multiple houses have the max count.
-        if (housesWithMostRecycling.size() > 1) {
-            // Starts writing for multiple houses.
-            buffWriter.write("Houses that recycled the most:\n");
-
-            // Loops through ArrayList and writes each house along with the max value.
-            for (int x = 0; x < (housesWithMostRecycling.size()); x++) {
-                buffWriter.write("House " + housesWithMostRecycling.get(x) + ": " + maxCrates + " crates\n");
+        // Adds exception handler and includes creating BufferedWriter object.
+        try (BufferedWriter buffWriter = new BufferedWriter(new FileWriter("lab5_problem2.txt"))) {
+            // Defines static number of houses.
+            int numberOfHouses = 8;
+            // Runs function that prompts User for input.
+            int[] cratesPerHouse = getRecyclingPerHouse(numberOfHouses);
+            // Runs function to sum up the User's inputs.
+            int totalCrates = calculateTotal(cratesPerHouse);
+            // Runs function to determine the max.
+            int maxCrates = calculateMax(cratesPerHouse);
+            // Runs function to determine the min.
+            int minCrates = calculateMin(cratesPerHouse);
+            // Runs function to determine the house(s) with the most crates.
+            ArrayList<Integer> housesWithMostRecycling = calculateHouseWithMostRecycling(cratesPerHouse, maxCrates);
+            // Loops through array and writes how many crates each house used.
+            for (int x = 0; x < cratesPerHouse.length; x++) {
+                buffWriter.write("House " + x + " recycled " + cratesPerHouse[x] + " crate(s)\n");
             }
+            // Writes the total number of crates.
+            buffWriter.write("\nTotal crates recycled = " + totalCrates + "\n\n");
+
+            // Determines if multiple houses have the max count.
+            if (housesWithMostRecycling.size() > 1) {
+                // Starts writing for multiple houses.
+                buffWriter.write("Houses that recycled the most:\n");
+
+                // Loops through ArrayList and writes each house along with the max value.
+                for (int x = 0; x < (housesWithMostRecycling.size()); x++) {
+                    buffWriter.write("House " + housesWithMostRecycling.get(x) + ": " + maxCrates + " crates\n");
+                }
+            } else {
+                // Writes a single house and its number of crates.
+                buffWriter.write("House that recycled the most:\n");
+                buffWriter.write("House " + housesWithMostRecycling.get(0) + ": " + maxCrates + " crates\n");
+            }
+            // Closes Scanner and Writer objects.
+            numberScanner.close();
+            buffWriter.close();
         }
-        else {
-            // Writes a single house and its number of crates.
-            buffWriter.write("House that recycled the most:\n");
-            buffWriter.write("House " + housesWithMostRecycling.get(0) + ": " + maxCrates + " crates\n");
+        catch (IOException err) {
+            // Displays a simple error message.
+            System.out.println("Can't write to file.");
         }
-        // Closes Scanner and Writer objects.
-        numberScanner.close();
-        buffWriter.close();
     }
     // Ask user for number of crates for each house. Store in array and return this array.
     public static int[] getRecyclingPerHouse(int houses) {
