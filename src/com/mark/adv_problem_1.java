@@ -10,8 +10,8 @@ import java.util.Scanner;
  */
 public class adv_problem_1 {
     public static void main(String[] args) {
-        try {
-            ArrayList<String[]> all_drinks = readDrinkInfo();
+        try (BufferedReader buffReader = new BufferedReader(new FileReader("coffee.txt"))) {
+            ArrayList<String[]> all_drinks = readDrinkInfo(buffReader);
             HashMap<String, Integer> salesData = askSales(all_drinks);
         }
         catch (IOException err) {
@@ -19,14 +19,15 @@ public class adv_problem_1 {
         }
     }
 
-    public static ArrayList<String[]> readDrinkInfo() throws IOException {
-        FileReader reader = new FileReader("coffee.txt");
-        BufferedReader buffReader = new BufferedReader(reader);
+    public static ArrayList<String[]> readDrinkInfo(BufferedReader buffReader) throws IOException {
+//        FileReader reader = new FileReader("coffee.txt");
+//        BufferedReader buffReader = new BufferedReader(reader);
         ArrayList<String[]> all_drinks = new ArrayList<String[]>();
         String drink_line = buffReader.readLine();
         while (drink_line != null) {
             String[] drink_info = drink_line.split(";");
             all_drinks.add(drink_info);
+            drink_line = buffReader.readLine();
         }
         buffReader.close();
         return all_drinks;
@@ -37,8 +38,16 @@ public class adv_problem_1 {
         HashMap<String, Integer> salesData = new HashMap<>();
         for (int i = 0; i < all_drinks.size(); i++) {
             System.out.println("How many " + all_drinks.get(i)[0] + " drinks were sold today?");
-            int sales_query = numScanner.nextInt();
-            salesData.put(all_drinks.get(i)[0], sales_query);
+            String sales_query = numScanner.nextLine();
+            int sales_num = 0;
+            if (checkNumber(sales_query)) {
+                sales_num = Integer.parseInt(sales_query);
+                salesData.put(all_drinks.get(i)[0], sales_num);
+            }
+            else {
+                System.out.println("Invalid input attempted.");
+                return null;
+            }
         }
         numScanner.close();
         return salesData;
@@ -60,4 +69,11 @@ public class adv_problem_1 {
         }
         buffWriter.close();
     }
+
+    public static boolean checkNumber(String maybeNumber) {
+        return maybeNumber.matches("-?\\d+(\\.\\d+)?");
+    }
 }
+
+//helpful sites:
+//http://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java
