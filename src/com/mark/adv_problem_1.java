@@ -13,6 +13,9 @@ public class adv_problem_1 {
         try (BufferedReader buffReader = new BufferedReader(new FileReader("coffee.txt"))) {
             ArrayList<String[]> all_drinks = readDrinkInfo(buffReader);
             HashMap<String, Integer> salesData = askSales(all_drinks);
+            if (salesData != null) {
+
+            }
         }
         catch (IOException err) {
             System.out.println("Unable to access file.");
@@ -20,8 +23,6 @@ public class adv_problem_1 {
     }
 
     public static ArrayList<String[]> readDrinkInfo(BufferedReader buffReader) throws IOException {
-//        FileReader reader = new FileReader("coffee.txt");
-//        BufferedReader buffReader = new BufferedReader(reader);
         ArrayList<String[]> all_drinks = new ArrayList<String[]>();
         String drink_line = buffReader.readLine();
         while (drink_line != null) {
@@ -40,7 +41,7 @@ public class adv_problem_1 {
             System.out.println("How many " + all_drinks.get(i)[0] + " drinks were sold today?");
             String sales_query = numScanner.nextLine();
             int sales_num = 0;
-            if (checkNumber(sales_query)) {
+            if (sales_query.matches("-?\\d+(\\d+)?")) {     // checkNumber(sales_query)) {
                 sales_num = Integer.parseInt(sales_query);
                 salesData.put(all_drinks.get(i)[0], sales_num);
             }
