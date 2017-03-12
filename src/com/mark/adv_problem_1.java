@@ -68,7 +68,7 @@ public class adv_problem_1 {
             String costStr = String.format("Expenses $%.2f,", cost);
             String earnedStr = String.format("Revenue $%.2f,", earned);
             String profitStr = String.format("Profit $%.2f", profit);
-            buffWriter.write(String.format("%1s: Sold %2d, %3s %4s %5s\n",
+            buffWriter.write(String.format("%-14s: Sold %-2d, %-14s %-14s %s\n",
                     drink, sold, costStr, earnedStr, profitStr));
         }
         buffWriter.close();
