@@ -96,6 +96,11 @@ public class adv_problem_1 {
             String todayStr = formatDate.format(today);
             buffWriter.write(String.format("Sales Report for %s:\n", todayStr));
 
+            // Defines accumulators.
+            double totalExpenses = 0;
+            double totalRevenue = 0;
+            double totalProfit = 0;
+
             // Loops through ArrayList, captures values, and performs
             // calculations.
             for (Integer i = 0; i < all_drinks.size(); i++) {
@@ -106,6 +111,11 @@ public class adv_problem_1 {
                 double pricePer = Double.parseDouble(all_drinks.get(i)[2]);
                 double earned = pricePer * sold;
                 double profit = earned - cost;
+
+                // Adds values to appropriate accumulators.
+                totalExpenses += cost;
+                totalRevenue += earned;
+                totalProfit += profit;
 
                 // Creates strings of values and adds formatting to them.
                 // I was unable to get formats added to all variables with
@@ -118,6 +128,11 @@ public class adv_problem_1 {
                 buffWriter.write(String.format("%-14s %-2s %-14s %-14s %s\n",
                         drinkStr, soldStr, costStr, earnedStr, profitStr));
             }
+            // Writes the totals to the end of the file.
+            buffWriter.write(String.format("\nTotal Expenses: $%.2f\n", totalExpenses));
+            buffWriter.write(String.format("Total Revenue: $%.2f\n", totalRevenue));
+            buffWriter.write(String.format("Total Profits: $%.2f", totalProfit));
+
             // Closes writer and displays success message.
             buffWriter.close();
             System.out.println("Report successfully created.");

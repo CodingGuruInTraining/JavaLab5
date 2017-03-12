@@ -1,4 +1,4 @@
-Sales Report for March 11, 2017:
+Sales Report for March 12, 2017:
 cappuccino:    Sold 1, Expenses $1.56, Revenue $3.50, Profit $1.94
 espresso:      Sold 1, Expenses $0.95, Revenue $1.50, Profit $0.55
 latte:         Sold 1, Expenses $1.67, Revenue $3.75, Profit $2.08
@@ -11,3 +11,7 @@ hot chocolate: Sold 1, Expenses $0.65, Revenue $2.25, Profit $1.60
 coffee:        Sold 1, Expenses $0.25, Revenue $1.65, Profit $1.40
 chai tea:      Sold 1, Expenses $1.23, Revenue $3.50, Profit $2.27
 mocha:         Sold 1, Expenses $1.45, Revenue $3.70, Profit $2.25
+
+Total Expenses: $11.11
+Total Revenue: $31.63
+Total Profits: $20.52
