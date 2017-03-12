@@ -14,7 +14,7 @@ public class adv_problem_1 {
             ArrayList<String[]> all_drinks = readDrinkInfo(buffReader);
             HashMap<String, Integer> salesData = askSales(all_drinks);
             if (salesData != null) {
-
+                makeSalesReport(all_drinks,salesData);
             }
         }
         catch (IOException err) {
@@ -41,7 +41,7 @@ public class adv_problem_1 {
             System.out.println("How many " + all_drinks.get(i)[0] + " drinks were sold today?");
             String sales_query = numScanner.nextLine();
             int sales_num = 0;
-            if (sales_query.matches("-?\\d+(\\d+)?")) {     // checkNumber(sales_query)) {
+            if (sales_query.matches("-?\\d+(\\d+)?")) {
                 sales_num = Integer.parseInt(sales_query);
                 salesData.put(all_drinks.get(i)[0], sales_num);
             }
@@ -65,15 +65,13 @@ public class adv_problem_1 {
             double pricePer = Double.parseDouble(all_drinks.get(i)[2]);
             double earned = pricePer * sold;
             double profit = earned - cost;
-            buffWriter.write(String.format("%: Sold %d, Expenses $%.2f, Revenue $%.2f, Profit $.2g",
+            buffWriter.write(String.format("%1s: Sold %2d, Expenses $%3$.2f, Revenue $%4$.2f, Profit $5$.2f\n",
                     drink, sold, cost, earned, profit));
         }
         buffWriter.close();
+        System.out.println("Report successfully created.");
     }
 
-    public static boolean checkNumber(String maybeNumber) {
-        return maybeNumber.matches("-?\\d+(\\.\\d+)?");
-    }
 }
 
 //helpful sites:
