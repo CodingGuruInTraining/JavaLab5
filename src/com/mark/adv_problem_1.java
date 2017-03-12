@@ -65,8 +65,11 @@ public class adv_problem_1 {
             double pricePer = Double.parseDouble(all_drinks.get(i)[2]);
             double earned = pricePer * sold;
             double profit = earned - cost;
-            buffWriter.write(String.format("%1s: Sold %2d, Expenses $%3$.2f, Revenue $%4$.2f, Profit $5$.2f\n",
-                    drink, sold, cost, earned, profit));
+            String costStr = String.format("Expenses $%.2f,", cost);
+            String earnedStr = String.format("Revenue $%.2f,", earned);
+            String profitStr = String.format("Profit $%.2f", profit);
+            buffWriter.write(String.format("%1s: Sold %2d, %3s %4s %5s\n",
+                    drink, sold, costStr, earnedStr, profitStr));
         }
         buffWriter.close();
         System.out.println("Report successfully created.");
