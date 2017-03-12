@@ -1,7 +1,10 @@
 package com.mark;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -57,6 +60,12 @@ public class adv_problem_1 {
     public static void makeSalesReport(ArrayList<String[]> all_drinks, HashMap salesData) throws IOException {
         FileWriter writer = new FileWriter("sales-report.txt");
         BufferedWriter buffWriter = new BufferedWriter(writer);
+
+        Date today = new Date();
+        DateFormat formatDate = new SimpleDateFormat("MMMM dd, yyyy");
+        String todayStr = formatDate.format(today);
+        buffWriter.write(String.format("Sales Report for: %s\n", todayStr));
+
         for (Integer i = 0; i < all_drinks.size(); i++) {
             String drink = all_drinks.get(i)[0];
             int sold = (int) salesData.get(drink);
@@ -65,11 +74,14 @@ public class adv_problem_1 {
             double pricePer = Double.parseDouble(all_drinks.get(i)[2]);
             double earned = pricePer * sold;
             double profit = earned - cost;
+
+            String drinkStr = drink + ":";
+            String soldStr = "Sold " + sold + ",";
             String costStr = String.format("Expenses $%.2f,", cost);
             String earnedStr = String.format("Revenue $%.2f,", earned);
             String profitStr = String.format("Profit $%.2f", profit);
-            buffWriter.write(String.format("%-14s: Sold %-2d, %-14s %-14s %s\n",
-                    drink, sold, costStr, earnedStr, profitStr));
+            buffWriter.write(String.format("%-14s %-2s %-14s %-14s %s\n",
+                    drinkStr, soldStr, costStr, earnedStr, profitStr));
         }
         buffWriter.close();
         System.out.println("Report successfully created.");
