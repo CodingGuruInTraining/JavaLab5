@@ -1,4 +1,4 @@
-Sales Report for: March 11, 2017
+Sales Report for March 11, 2017:
 cappuccino:    Sold 1, Expenses $1.56, Revenue $3.50, Profit $1.94
 espresso:      Sold 1, Expenses $0.95, Revenue $1.50, Profit $0.55
 latte:         Sold 1, Expenses $1.67, Revenue $3.75, Profit $2.08
