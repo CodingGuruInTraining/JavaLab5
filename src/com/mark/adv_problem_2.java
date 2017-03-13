@@ -15,7 +15,8 @@ public class adv_problem_2 {
         // Exception handler.
         try {
             // Captures the path of the current location of the program.
-            String fullPath = Paths.get(".").toAbsolutePath().normalize().toString();
+            // This was modified as part adv_problem_3.
+            String fullPath = System.getProperty("user.dir");
             // Creates less wordy variable for adding the appropriate separator
             // based on the system in use (hopefully).
             String sep = File.separator;
